@@ -1,17 +1,33 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import changeText from '../components/Sample'
+import { changeText } from '../state/change'
 
 class Sample extends React.Component {
+    state = {
+        inputText: ''
+    }
+
+    handleInputChange = value => {
+        this.setState({
+            inputText: value
+        })
+    }
+
     render() {
         return (
             <div>
-                <div>{this.props.text}</div>
+
+                <input
+                    onChange={e => this.handleInputChange(e.target.value)}
+                />
                 <button
-                    onClick={this.props.handleChangeText}
+                    onClick={() => this.props.handleChangeText(this.state.inputText)}
                 >
-                    Change 'b' to 'a'!
-        </button>
+                    Change!
+                </button>
+                <div style={{fontSize: '2em'}}>
+                    {this.props.text}
+                </div>
             </div>
         )
     }
@@ -22,7 +38,7 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-    handleChangeText: () => dispatch(changeText())
+    handleChangeText: newText => dispatch(changeText(newText))
 })
 
 export default connect(

@@ -1,4 +1,4 @@
-import { createStore, combineReducers } from 'redux'
+import { createStore, combineReducers, compose } from 'redux'
 import changeReducer from './state/change'
 
 const reducer = combineReducers({
@@ -6,7 +6,9 @@ const reducer = combineReducers({
 })
 
 const store = createStore(
-    reducer
+    reducer,
+    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 )
+
 
 export default store

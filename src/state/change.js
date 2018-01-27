@@ -1,18 +1,20 @@
 const CHANGE = 'change/CHANGE'
 
-export const changeText = () => ({
-    type: CHANGE
+export const changeText = text => ({
+    type: CHANGE,
+    text
 })
 
 const initialState = {
-    text: 'b'
+    text: ''
 }
 
 export default (state = initialState, action) => {
     switch (action.type) {
         case CHANGE:
             return {
-                text: 'a'
+                ...state,
+                text: action.text
             }
         default:
             return state
